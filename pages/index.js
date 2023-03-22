@@ -12,28 +12,23 @@ export default function Index({ allPosts }) {
   return (
     <>
       <Head>
-        <title>im labor</title>
-        <meta
-          name="description"
-          content="im labor is an artist collective founded in 2017."
-        />
+        <title>Blog</title>
+        <meta name="description" content="My Blog" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
         <Intro>Latest</Intro>
         {heroPost && (
           <HeroPost
-            cat="journal"
             slug={heroPost.fields.slug}
             coverImage={heroPost.fields.coverImage.fields.file}
             title={heroPost.fields.title}
             date={heroPost.fields.date}
             excerpt={heroPost.fields.excerpt}
-            author={heroPost.fields.author.fields}
           />
         )}
         {morePosts.length > 0 && (
-          <MoreStories heading={'Journal'} posts={morePosts} />
+          <MoreStories heading={'Articles'} posts={morePosts} />
         )}
       </Container>
     </>

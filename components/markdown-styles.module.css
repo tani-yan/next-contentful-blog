@@ -16,3 +16,10 @@
 .markdown h3 {
   @apply mt-8 mb-4 text-2xl leading-snug;
 }
+
+.markdown-about p,
+.markdown-about ul,
+.markdown-about ol,
+.markdown-about blockquote {
+  @apply my-6 leading-relaxed;
+}

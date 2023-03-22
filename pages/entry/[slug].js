@@ -14,28 +14,24 @@ export default function Post({ post, morePosts }) {
   // }
   // const post = posts[0]
   // console.log(morePosts)
+  const title = `${post.fields.title} | Blog`
   return (
     <>
       <Container>
         <article className="mb-32">
           <Head>
-            <title>{post.fields.title} | im labor</title>
+            <title>{title}</title>
           </Head>
           <PostHeader
             title={post.fields.title}
-            author={post.fields.author}
             coverImage={post.fields.coverImage.fields.file}
             date={post.fields.date}
           />
-          <PostBody
-            content={post.fields.content}
-            about={post.fields.about}
-            author={post.fields.author.fields}
-          />
+          <PostBody content={post.fields.content} about={post.fields.about} />
         </article>
         <SectionSeparator />
         {morePosts && morePosts.length > 0 && (
-          <MoreStories heading={'More articles'} posts={morePosts} />
+          <MoreStories heading={'Related articles'} posts={morePosts} />
         )}
       </Container>
     </>

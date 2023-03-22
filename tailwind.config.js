@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -28,8 +30,15 @@ module.exports = {
         '7xl': '4.5rem',
         '8xl': '6.25rem',
       },
+      transitionProperty: {
+        visibility: 'visibility, opacity',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant('aria-hidden-false', '&[aria-hidden="false"]')
+    }),
+  ],
   darkMode: 'media',
 }

@@ -1,0 +1,57 @@
+.wrap::before,
+.wrap::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 1.25rem;
+  background: black;
+  transition: transform ease 0.3s 0s;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wrap::before,
+  .wrap::after {
+    background: white;
+  }
+}
+
+.wrap::before {
+  transform: translateY(-4px) rotate(0deg);
+}
+
+.wrap::after {
+  transform: translateY(4px) rotate(0deg);
+}
+
+.expanded::before {
+  transform: translateY(1px) rotate(45deg);
+}
+
+.expanded::after {
+  transform: translateY(0) rotate(-45deg);
+}
+
+.link span {
+  position: relative;
+}
+
+.link span::before {
+  content: '';
+  display: none;
+  margin-right: 0.4em;
+  margin-bottom: 0.2em;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: black;
+  border-radius: 50%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .link span::before {
+    background: white;
+  }
+}
+
+.current span::before {
+  display: inline-block;
+}

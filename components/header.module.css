@@ -1,0 +1,35 @@
+.link {
+  position: relative;
+}
+
+.link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(100%);
+  left: -0.75rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: black;
+  border-radius: 50%;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .link::before {
+    background: white;
+  }
+}
+
+@media (hover: hover) {
+  .link:hover::before {
+    transform: translateY(-40%);
+    opacity: 1;
+  }
+}
+
+.current::before {
+  transform: translateY(-40%);
+  opacity: 1;
+}

@@ -3,7 +3,7 @@ import { BLOCKS } from '@contentful/rich-text-types'
 import markdownStyles from './markdown-styles.module.css'
 import RichTextAsset from './rich-text-asset'
 
-const customMarkdownOptions = (content) => ({
+const customMarkdownOptions = (content, text) => ({
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: (node) => (
       <RichTextAsset
@@ -12,6 +12,11 @@ const customMarkdownOptions = (content) => ({
         description={node.data.target.fields.description}
       />
     ),
+  },
+  renderText: (text) => {
+    return text.split('\n').reduce((children, textSegment, index) => {
+      return [...children, index > 0 && <br key={index} />, textSegment]
+    }, [])
   },
 })
 
@@ -22,14 +27,6 @@ export default function PostBody({ content, about, author }) {
         <div>
           {documentToReactComponents(content, customMarkdownOptions(content))}
         </div>
-      </div>
-      <div className="mt-16">
-        <h3 className="mb-4 text-xl font-bold">About the Artist__</h3>
-        <p className="leading-relaxed">{about}</p>
-      </div>
-      <div className="mt-16">
-        <h3 className="mb-4 text-xl font-bold">{author.name}__</h3>
-        <p className="leading-relaxed">{author.about}</p>
       </div>
     </div>
   )

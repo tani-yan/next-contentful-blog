@@ -1,31 +1,23 @@
 import Container from './container'
 
 export default function Footer() {
+  const year = new Date().getUTCFullYear()
+
   return (
     <footer className="border-t border-l-accent-2  bg-accent-1 dark:bg-black">
       <Container>
-        <div className="flex justify-between py-14 font-medium">
-          <ul className="flex">
-            <li>im labor is an artist collective founded in 2017.</li>
-            <li className="pl-6">Copyright &copy; 2022 im labor.</li>
+        <div className="justify-between py-14 font-medium md:flex">
+          <ul className="md:flex">
+            <li>Copyright &copy; {year} tani-yan.</li>
           </ul>
-          <ul className="flex uppercase">
+          <ul className="mt-8 md:mt-0 md:flex">
             <li>
               <a
-                href="mailto:info@imlabor.org"
+                href="https://github.com/tani-yan"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                contact
-              </a>
-            </li>
-            <li className="pl-8">
-              <a
-                href="https://www.instagram.com/imlabor/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                instagram
+                Github
               </a>
             </li>
           </ul>
