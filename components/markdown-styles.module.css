@@ -1,25 +1,35 @@
 .markdown {
-  @apply text-lg leading-relaxed;
+  @apply leading-relaxed;
 }
 
 .markdown p,
 .markdown ul,
 .markdown ol,
 .markdown blockquote {
-  @apply my-6;
+  @apply my-6 text-lg;
+}
+
+.markdown ul,
+.markdown ol {
+  @apply pl-10;
+}
+
+.markdown ul {
+  @apply list-disc;
+}
+
+.markdown ol {
+  @apply list-decimal;
+}
+
+.markdown a {
+  @apply underline;
 }
 
 .markdown h2 {
-  @apply mt-12 mb-4 text-3xl leading-snug;
+  @apply mt-12 mb-4 text-3xl font-bold leading-snug;
 }
 
 .markdown h3 {
-  @apply mt-8 mb-4 text-2xl leading-snug;
-}
-
-.markdown-about p,
-.markdown-about ul,
-.markdown-about ol,
-.markdown-about blockquote {
-  @apply my-6 leading-relaxed;
+  @apply mt-8 mb-4 text-2xl font-bold leading-snug;
 }

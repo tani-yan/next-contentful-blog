@@ -1,5 +1,5 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import markdownStyles from './markdown-styles.module.css'
 import RichTextAsset from './rich-text-asset'
 
@@ -12,6 +12,24 @@ const customMarkdownOptions = (content, text) => ({
         description={node.data.target.fields.description}
       />
     ),
+    [INLINES.HYPERLINK]: (node, children) => {
+      let anchorAttrs = {}
+      if (
+        !node.data.uri.includes(
+          'https://next-contentful-blog-tani-yan.vercel.app'
+        )
+      ) {
+        anchorAttrs = {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        }
+      }
+      return (
+        <a href={node.data.uri} {...anchorAttrs}>
+          {children}
+        </a>
+      )
+    },
   },
   renderText: (text) => {
     return text.split('\n').reduce((children, textSegment, index) => {
