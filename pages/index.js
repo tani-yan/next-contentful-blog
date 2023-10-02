@@ -5,10 +5,9 @@ import Intro from '../components/intro'
 import MoreStories from '../components/more-stories'
 import { buildClient } from '../lib/contentful'
 
-export default function Index({ allPosts }) {
+export default function Index({ allPosts, allCategories, allTagItems }) {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
-  // console.log(allPosts)
   return (
     <>
       <Head>
@@ -17,18 +16,27 @@ export default function Index({ allPosts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <Intro>Latest</Intro>
+        <Intro>LATEST</Intro>
         {heroPost && (
           <HeroPost
             slug={heroPost.fields.slug}
             coverImage={heroPost.fields.coverImage.fields.file}
             title={heroPost.fields.title}
             date={heroPost.fields.date}
+            category={heroPost.fields.category}
+            tags={heroPost.fields.tag}
             excerpt={heroPost.fields.excerpt}
           />
         )}
+        <h2 className="mb-16 text-6xl font-bold leading-tight tracking-tighter md:text-7xl">
+          ARTICLES
+        </h2>
         {morePosts.length > 0 && (
-          <MoreStories heading={'Articles'} posts={morePosts} />
+          <MoreStories
+            posts={morePosts}
+            categories={allCategories}
+            tags={allTagItems}
+          />
         )}
       </Container>
     </>
@@ -42,7 +50,20 @@ export async function getStaticProps() {
     content_type: 'post',
     order: '-fields.date',
   })
+  const categoryItems = await client.getEntries({
+    content_type: 'category',
+    order: 'fields.name',
+  })
+  const tagItems = await client.getEntries({
+    content_type: 'tag',
+    order: 'fields.name',
+  })
+  // console.log(tagItems.items)
   return {
-    props: { allPosts: items },
+    props: {
+      allPosts: items,
+      allCategories: categoryItems.items,
+      allTagItems: tagItems.items,
+    },
   }
 }

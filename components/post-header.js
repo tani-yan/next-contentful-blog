@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import CoverImage from './cover-image'
 import DateComponent from './date'
 import PostTitle from './post-title'
 
-export default function PostHeader({ title, coverImage, date }) {
+export default function PostHeader({ title, coverImage, date, category }) {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -12,6 +13,11 @@ export default function PostHeader({ title, coverImage, date }) {
       <div className="mx-auto max-w-2xl">
         <div className="mb-6 text-lg">
           <DateComponent dateString={date} />
+          <span className="ml-4 inline-block">
+            <Link href={`/category/${category.fields.slug}`}>
+              <a className="hover:underline">{category.fields.name}</a>
+            </Link>
+          </span>
         </div>
       </div>
     </>

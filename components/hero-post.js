@@ -1,8 +1,17 @@
 import Link from 'next/link'
 import CoverImage from './cover-image'
 import DateComponent from './date'
+import PostTags from './post-tags'
 
-export default function HeroPost({ slug, coverImage, title, date, excerpt }) {
+export default function HeroPost({
+  slug,
+  coverImage,
+  title,
+  date,
+  category,
+  tags,
+  excerpt,
+}) {
   return (
     <section>
       <div className="my-8 md:my-16">
@@ -15,9 +24,15 @@ export default function HeroPost({ slug, coverImage, title, date, excerpt }) {
               <a className="hover:underline">{title}</a>
             </Link>
           </h2>
-          <div className="mb-4 text-lg md:mb-0">
+          <div className="text-lg">
             <DateComponent dateString={date} />
+            <span className="ml-4 inline-block">
+              <Link href={`/category/${category.fields.slug}`}>
+                <a className="hover:underline">{category.fields.name}</a>
+              </Link>
+            </span>
           </div>
+          <PostTags tags={tags} />
         </div>
         <div>
           <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
