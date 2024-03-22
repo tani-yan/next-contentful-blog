@@ -6,7 +6,7 @@
 .markdown ul,
 .markdown ol,
 .markdown blockquote {
-  @apply my-6 text-lg;
+  @apply my-6 text-base leading-relaxed;
 }
 
 .markdown ul,
@@ -22,14 +22,20 @@
   @apply list-decimal;
 }
 
+
+.markdown ul p,
+.markdown ol p {
+  @apply my-2;
+}
+
 .markdown a {
   @apply underline;
 }
 
 .markdown h2 {
-  @apply mt-12 mb-4 text-3xl font-bold leading-snug;
+  @apply mt-16 mb-4 text-3xl font-bold leading-snug;
 }
 
 .markdown h3 {
-  @apply mt-8 mb-4 text-2xl font-bold leading-snug;
+  @apply mt-12 mb-4 text-2xl font-bold leading-snug;
 }
