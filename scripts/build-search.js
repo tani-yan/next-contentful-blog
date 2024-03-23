@@ -32,7 +32,7 @@ function transformPostsToSearchObjects(posts) {
     }
   })
 
-  console.log(transformed)
+  // console.log(transformed)
 
   return transformed
 }
