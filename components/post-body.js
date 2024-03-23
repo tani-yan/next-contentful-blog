@@ -7,6 +7,33 @@ import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 const customMarkdownOptions = (content, text) => ({
   renderNode: {
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+      const entry = node.data.target.sys.contentType.sys.id;
+
+      if (entry === "codeBlock") {
+        const fileName = node.data.target.fields.fileName
+
+        return (
+          <>
+            {fileName && (
+              <div>
+                <span>{fileName}</span>
+              </div>
+            )}
+            <SyntaxHighlighter 
+              language={node.data.target.fields.language} 
+              style={dracula}
+              customStyle={{
+                fontSize: '0.8125em',
+                lineHeight: '1.692'
+              }}
+            >
+              {node.data.target.fields.code}
+            </SyntaxHighlighter>
+          </>
+        )
+      }
+    },
     [BLOCKS.EMBEDDED_ASSET]: (node) => (
       <RichTextAsset
         id={node.data.target.sys.id}
@@ -33,55 +60,55 @@ const customMarkdownOptions = (content, text) => ({
       )
     },
     // コードブロックをdivで括る
-    [BLOCKS.PARAGRAPH]: (node, children) => {
-      if (node.content.length === 1 && node.content[0].marks.find(x => x.type === 'code')) {
-        return <div>{children}</div>
-      }
-      return <p>{children}</p>
-    },
+    // [BLOCKS.PARAGRAPH]: (node, children) => {
+    //   if (node.content.length === 1 && node.content[0].marks.find(x => x.type === 'code')) {
+    //     return <div>{children}</div>
+    //   }
+    //   return <p>{children}</p>
+    // },
   },
-  renderText: (text) => {
-    return text.split('\n').reduce((children, textSegment, index) => {
-      return [...children, index > 0 && <br key={index} />, textSegment]
-    }, [])
-  },
-  renderMark: {
-    [MARKS.CODE]: (text) => {
-      text.shift() // コードブロックのfalseを削除
-      let language = text.shift() // コードブロックの1行目の言語指定をClassに利用後削除
-      const classList = language.indexOf(':') ? language.split(':') : []
-      language = classList[0]?.replace('language-', '')
-      const fileName = classList[1]
-      text.shift() // コードブロックの1行目の改行を削除
+  // renderText: (text) => {
+  //   return text.split('\n').reduce((children, textSegment, index) => {
+  //     return [...children, index > 0 && <br key={index} />, textSegment]
+  //   }, [])
+  // },
+  // renderMark: {
+  //   [MARKS.CODE]: (text) => {
+  //     text.shift() // コードブロックのfalseを削除
+  //     let language = text.shift() // コードブロックの1行目の言語指定をClassに利用後削除
+  //     const classList = language.indexOf(':') ? language.split(':') : []
+  //     language = classList[0]?.replace('language-', '')
+  //     const fileName = classList[1]
+  //     text.shift() // コードブロックの1行目の改行を削除
 
-      const value = text.reduce((acc, cur) => {
-        if (typeof cur !== "string" && cur.type === "br") {
-          return acc + "\n"
-        }
-        return acc + cur
-      }, "")
+  //     const value = text.reduce((acc, cur) => {
+  //       if (typeof cur !== "string" && cur.type === "br") {
+  //         return acc + "\n"
+  //       }
+  //       return acc + cur
+  //     }, "")
 
-      return (
-        <>
-          {fileName && (
-            <div>
-              <span>{fileName}</span>
-            </div>
-          )}
-          <SyntaxHighlighter 
-            language={language} 
-            style={dracula}
-            customStyle={{
-              fontSize: '0.8125em',
-              lineHeight: '1.692'
-            }}
-          >
-            {value}
-          </SyntaxHighlighter>
-        </>
-      )
-    },
-  },
+  //     return (
+  //       <>
+  //         {fileName && (
+  //           <div>
+  //             <span>{fileName}</span>
+  //           </div>
+  //         )}
+  //         <SyntaxHighlighter 
+  //           language={language} 
+  //           style={dracula}
+  //           customStyle={{
+  //             fontSize: '0.8125em',
+  //             lineHeight: '1.692'
+  //           }}
+  //         >
+  //           {value}
+  //         </SyntaxHighlighter>
+  //       </>
+  //     )
+  //   },
+  // },
 })
 
 export default function PostBody({ content, about, author }) {

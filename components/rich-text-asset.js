@@ -8,7 +8,7 @@ export default function RichTextAsset({ id, assets, description }) {
   if (asset?.url) {
     // return <Image src={asset.url} layout="fill" alt={asset.description} />
     return (
-      <div className="my-12">
+      <div className="my-12 flex justify-center">
         <ContentfulImage
           width={asset.details.image.width}
           height={asset.details.image.height}
