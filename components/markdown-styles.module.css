@@ -39,3 +39,7 @@
 .markdown h3 {
   @apply mt-12 mb-4 text-2xl font-bold leading-snug;
 }
+
+.markdown p code {
+  @apply py-0.5 px-1 rounded bg-[#7dd4fc3a] text-[0.8125em];
+}
