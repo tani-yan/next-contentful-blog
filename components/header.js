@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import styles from './header.module.css'
 import { useMediaQuery } from 'react-responsive'
 import { pages } from './navigation'
+import Search from './search'
 
 export default function Header() {
   const scrollDirection = useScrollDirection()
@@ -22,7 +23,7 @@ export default function Header() {
       <Container>
         <h1></h1>
         <nav className="flex h-16 items-center font-medium">
-          <div className="flex w-full">
+          <div className="flex w-full justify-between">
             <div>
               <Link href="/">
                 <a
@@ -32,6 +33,9 @@ export default function Header() {
                   Blog
                 </a>
               </Link>
+            </div>
+            <div>
+              <Search />
             </div>
             {/* <div className="ml-auto hidden md:block">
               {pages.map((link) => (

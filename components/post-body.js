@@ -11,7 +11,7 @@ const customMarkdownOptions = (content, text) => ({
     [BLOCKS.EMBEDDED_ENTRY]: (node) => {
       const entry = node.data.target.sys.contentType.sys.id
 
-      if (entry === "codeBlock") {
+      if (entry === 'codeBlock') {
         const fileName = node.data.target.fields.fileName
 
         return (
@@ -59,7 +59,7 @@ const customMarkdownOptions = (content, text) => ({
     [INLINES.ENTRY_HYPERLINK]: (node, children) => {
       return (
         <Link href={`/entry/${node.data.target.fields.slug}`}>
-          <a className="hover:underline">{children}</a>
+          <a>{children}</a>
         </Link>
       )
     },
