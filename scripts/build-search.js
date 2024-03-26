@@ -25,19 +25,17 @@ function transformPostsToSearchObjects(posts) {
       title: post.fields.title,
       excerpt: post.fields.excerpt,
       slug: post.fields.slug,
-      // topicsCollection: { items: post.topicsCollection.items },
       date: post.fields.date,
-      // readingTime: post.readingTime,
-      content: richTextPlainTextRenderer.documentToPlainTextString(post.fields.content),
+      content: richTextPlainTextRenderer.documentToPlainTextString(
+        post.fields.content
+      ),
     }
   })
-
-  // console.log(transformed)
 
   return transformed
 }
 
-(async function () {
+;(async function () {
   dotenv.config({ path: '.env.local' })
 
   try {
@@ -47,7 +45,7 @@ function transformPostsToSearchObjects(posts) {
     // initialize the client with your environment variables
     const client = algoliasearch(
       process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-      process.env.ALGOLIA_SEARCH_ADMIN_KEY,
+      process.env.ALGOLIA_SEARCH_ADMIN_KEY
     )
 
     // initialize the index with your index name
@@ -58,11 +56,13 @@ function transformPostsToSearchObjects(posts) {
 
     // check the output of the response in the console
     console.log(
-      `🎉 Sucessfully added ${algoliaResponse.objectIDs.length} records to Algolia search. Object IDs:\n${algoliaResponse.objectIDs.join(
-        "\n",
-      )}`,
+      `🎉 Sucessfully added ${
+        algoliaResponse.objectIDs.length
+      } records to Algolia search. Object IDs:\n${algoliaResponse.objectIDs.join(
+        '\n'
+      )}`
     )
   } catch (error) {
     console.log(error)
   }
-})() 
+})()

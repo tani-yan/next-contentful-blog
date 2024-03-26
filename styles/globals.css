@@ -19,12 +19,34 @@ a {
   box-sizing: border-box;
 }
 
+input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.ais-Highlight-highlighted {
+  background-color: oklch(96.81% 0.0495 90.24227879900472);
+  color: oklch(52.79% 0.1496 54.65);
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.ais-PoweredBy-text {
+  @apply text-xs text-gray-500;
+}
+.ais-PoweredBy-logo {
+  @apply ml-3 h-4 w-16;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    @apply text-white;
+    @apply bg-black;
+  }
+  .ais-Highlight-highlighted {
+    background-color: oklch(24.95% 0.0642 64.78);
+    color: oklch(77.21% 0.1991 64.28);
   }
 }

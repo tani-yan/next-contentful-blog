@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Container from './container'
 import useScrollDirection from './use-scroll-direction'
 import { useRouter } from 'next/router'
-import styles from './header.module.css'
+// import styles from './header.module.css'
 import { useMediaQuery } from 'react-responsive'
-import { pages } from './navigation'
+// import { pages } from './navigation'
 import Search from './search'
 
 export default function Header() {
